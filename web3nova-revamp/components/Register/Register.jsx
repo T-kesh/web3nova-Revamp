@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Code, Server, Palette, Rocket, Sparkles, ChevronDown, ChevronUp,
-  Check, ArrowRight, ArrowLeft, User, Mail, Phone, MapPin, Github, Wallet, Star
+  Palette, Sparkles, ChevronDown, ChevronUp,
+  Check, ArrowRight, ArrowLeft, User, Mail, Phone, MapPin, Github, Wallet, Star,
+  Brain, Globe, Cpu
 } from "lucide-react";
 
 // ✅ Base URL of your Render API
@@ -159,48 +160,48 @@ function Step1({ onNext, formData, setFormData }) {
 
   const courses = [
     {
-      id: "rust",
-      title: "Rust Blockchain Protocol Development",
-      icon: <Code className="w-6 h-6" />,
+      id: "zk-rust",
+      title: "ZK, Rust & Protocol Engineering",
+      icon: <Cpu className="w-6 h-6" />,
+      color: "#F65314", // Rust-like orange
+      short: "Master Zero Knowledge proofs and protocol engineering with Rust.",
+      long: "Deep dive into ZK-SNARKs/STARKs, circuit design, and high-performance blockchain protocol development using Rust. Build next-gen privacy-preserving and scalable decentralized systems.",
+      level: "Advanced",
+    },
+    {
+      id: "smart-contracts",
+      title: "Smart Contracts (Web3 Development)",
+      icon: <Sparkles className="w-6 h-6" />,
       color: "#4A90E2",
-      short: "Master-class for blockchain protocol engineering with Rust.",
-      long: "Dive deep into memory-safe systems programming while building high-performance blockchain nodes, P2P layers, and consensus engines. You will architect real protocols used in production networks.",
-      level: "Advanced",
+      short: "Build secure decentralized applications with Solidity & EVM.",
+      long: "Comprehensive training in writing, testing, and deploying smart contracts. Focus on gas optimization, security auditing, and integration with frontend applications using modern tooling.",
+      level: "Intermediate",
     },
     {
-      id: "backend",
-      title: "Backend Development (Web2 Advanced)",
-      icon: <Server className="w-6 h-6" />,
-      color: "#FDB913",
-      short: "Build powerful server-side apps with Python, Django & more.",
-      long: "Learn to design scalable REST & GraphQL APIs, handle authentication, optimise databases, deploy with Docker/K8s, and integrate Web3 tooling where needed.",
-      level: "Advanced",
+      id: "web-dev",
+      title: "Web Development",
+      icon: <Globe className="w-6 h-6" />,
+      color: "#00A1F1",
+      short: "Full-stack web development with modern technologies.",
+      long: "Master both frontend and backend development. Build responsive user interfaces with React/Next.js and robust APIs with Node.js/Python. Learn database management, authentication, and deployment.",
+      level: "Beginner/Intermediate",
     },
     {
-      id: "frontend",
-      title: "Frontend Development (Web2 Advanced)",
+      id: "ui-ux",
+      title: "UI/UX Design",
       icon: <Palette className="w-6 h-6" />,
-      color: "#88B9E6",
-      short: "Modern React, advanced JavaScript (ES6), CSS & tooling.",
-      long: "Master component architecture, state management, TypeScript, unit/e2e testing, CI/CD, performance tuning, and connecting to smart-contract backends.",
-      level: "Advanced",
-    },
-    {
-      id: "launchpad",
-      title: "Web2 Launchpad",
-      icon: <Rocket className="w-6 h-6" />,
-      color: "#FDB913",
-      short: "Fundamentals of web dev with HTML5, CSS & modern frameworks.",
-      long: "Perfect starter track: semantic HTML, responsive CSS, JavaScript essentials, Git/GitHub, and your first hosted projects. Graduate ready for advanced stacks.",
+      color: "#FF007F",
+      short: "Design intuitive and beautiful user experiences.",
+      long: "Learn the principles of user-centric design, wireframing, prototyping, and high-fidelity UI design using tools like Figma. Create compelling digital products that users love.",
       level: "Beginner",
     },
     {
-      id: "solidity",
-      title: "Solidity (Web3 Development)",
-      icon: <Sparkles className="w-6 h-6" />,
-      color: "#4A90E2",
-      short: "Smart-contracts & dApp development with Solidity.",
-      long: "Write, test, and deploy secure contracts; integrate front-ends via Ethers.js; learn upgradable patterns, gas optimisation, and audited best practices.",
+      id: "ai-automation",
+      title: "AI & Automation",
+      icon: <Brain className="w-6 h-6" />,
+      color: "#7C3AED",
+      short: "Leverage AI to build intelligent agents and automation workflows.",
+      long: "Explore the cutting edge of Artificial Intelligence. Learn to build custom LLM agents, automate complex workflows, and integrate AI capabilities into web and blockchain applications.",
       level: "Intermediate",
     },
   ];
@@ -241,10 +242,23 @@ function Step1({ onNext, formData, setFormData }) {
   return (
     <div className="w-full max-w-6xl">
       <ReviewMarquee />
+
+      <div className="flex justify-center -mt-4 mb-12 relative z-20">
+        <motion.button
+          onClick={() => document.getElementById('course-selection')?.scrollIntoView({ behavior: 'smooth' })}
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="p-3 rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition-colors backdrop-blur-sm group"
+        >
+          <ChevronDown className="w-6 h-6 text-gray-400 group-hover:text-white transition-colors" />
+        </motion.button>
+      </div>
+
       <motion.div
+        id="course-selection"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-12 text-center max-w-4xl mx-auto"
+        className="mb-12 text-center max-w-4xl mx-auto scroll-mt-24"
       >
         <div className="inline-block px-6 py-2 rounded-full mb-4 bg-gradient-to-r from-yellow-400/10 to-blue-400/10 border border-yellow-400/20">
           <span className="font-semibold text-sm bg-gradient-to-r from-yellow-400 via-blue-400 to-blue-500 bg-clip-text text-transparent uppercase tracking-wider">
@@ -264,32 +278,21 @@ function Step1({ onNext, formData, setFormData }) {
       <div className="grid gap-4 mb-12">
         {courses.map((c, index) => {
           const isOpen = !!expanded[c.id];
-          const isSelected = formData.course === c.id;
 
           return (
-            <motion.label
+            <motion.a
               key={c.id}
+              href="https://forms.gle/Hid5MvmJJQsUUry46"
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className={`group relative flex cursor-pointer flex-col rounded-2xl border backdrop-blur-xl p-6 transition-all duration-300 ${isSelected
-                ? "border-blue-400 bg-blue-400/10 scale-[1.02]"
-                : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10"
-                }`}
+              className="group relative flex cursor-pointer flex-col rounded-2xl border backdrop-blur-xl p-6 transition-all duration-300 border-white/10 bg-white/5 hover:border-blue-400/50 hover:bg-white/10 hover:scale-[1.01]"
             >
-              <input
-                type="radio"
-                name="course"
-                value={c.id}
-                checked={isSelected}
-                onChange={(e) => setFormData({ ...formData, course: e.target.value })}
-                className="sr-only"
-              />
-
               <div className="flex items-start gap-4">
                 <div
-                  className={`flex-shrink-0 w-14 h-14 rounded-xl flex items-center justify-center text-black transition-all duration-300 ${isSelected ? 'scale-110' : ''
-                    }`}
+                  className="flex-shrink-0 w-14 h-14 rounded-xl flex items-center justify-center text-black transition-all duration-300 group-hover:scale-110"
                   style={{ backgroundColor: c.color }}
                 >
                   {c.icon}
@@ -309,13 +312,8 @@ function Step1({ onNext, formData, setFormData }) {
                       </div>
                     </div>
 
-                    <div
-                      className={`flex-shrink-0 h-6 w-6 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${isSelected
-                        ? "border-blue-400 bg-blue-400"
-                        : "border-gray-600 group-hover:border-gray-500"
-                        }`}
-                    >
-                      {isSelected && <Check className="w-4 h-4 text-black" />}
+                    <div className="flex-shrink-0 h-8 w-8 rounded-full border border-white/20 flex items-center justify-center group-hover:border-blue-400 group-hover:bg-blue-400 video-transition transition-all duration-300">
+                      <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-black" />
                     </div>
                   </div>
 
@@ -344,10 +342,11 @@ function Step1({ onNext, formData, setFormData }) {
                   <button
                     type="button"
                     onClick={(e) => {
+                      e.preventDefault();
                       e.stopPropagation();
                       toggleExpand(c.id);
                     }}
-                    className="mt-3 inline-flex items-center gap-1 text-sm font-semibold transition-colors duration-300 hover:text-white focus:outline-none"
+                    className="mt-3 inline-flex items-center gap-1 text-sm font-semibold transition-colors duration-300 hover:text-white focus:outline-none z-20 relative"
                     style={{ color: c.color }}
                   >
                     {isOpen ? (
@@ -358,30 +357,9 @@ function Step1({ onNext, formData, setFormData }) {
                   </button>
                 </div>
               </div>
-
-              {isSelected && (
-                <div
-                  className="absolute -inset-0.5 rounded-2xl opacity-50 blur-lg -z-10"
-                  style={{ background: `radial-gradient(circle, ${c.color}, transparent)` }}
-                />
-              )}
-            </motion.label>
+            </motion.a>
           );
         })}
-      </div>
-
-      <div className="flex justify-center">
-        <button
-          onClick={handleNext}
-          disabled={!formData.course || loading}
-          className={`relative group inline-flex items-center gap-3 px-10 py-4 rounded-full font-bold text-lg transition-all duration-300 ${formData.course && !loading
-            ? "bg-gradient-to-r from-blue-400 to-yellow-400 text-black hover:scale-105 shadow-2xl cursor-pointer"
-            : "bg-gray-800 text-gray-500 cursor-not-allowed"
-            }`}
-        >
-          {loading ? "Connecting..." : "Continue to Next Step"}
-          {!loading && <ArrowRight className="w-5 h-5" />}
-        </button>
       </div>
     </div>
   );
