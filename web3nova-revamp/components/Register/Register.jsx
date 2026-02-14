@@ -76,17 +76,24 @@ const reviews = [
     image: null
   },
   {
-    text: "The mentorship at Web3Nova was a game-changer for me. I went from zero to deploying my first dApp in weeks.",
-    highlight: "Deployed my first dApp in weeks.",
-    author: "Sarah J.",
-    role: "Frontend Dev -> Web3 Dev",
+    text: "My time at Web3Nova as help me in leveling up my frontend`, communication and networking skills",
+    highlight: "Improved my frontend skills and landed frontend dev jobs",
+    author: "Adedamola",
+    role: "Frontend Developer at Web3Nova",
     image: null
   },
   {
-    text: "Understanding the core of Rust and Solana through this program unlocked so many opportunities for me.",
-    highlight: "Unlocked opportunities with Rust & Solana.",
-    author: "David K.",
-    role: "Protocol Engineer",
+    text: "At Web3nova, I’ve built connections, turned a month-long project into a 24-hour sprint, learned to earn while learning, and discovered expertise isn’t reserved for “big” moments.",
+    highlight: "Turning 3weeks project into 3days project",
+    author: "Afolabi Emmanuel",
+    role: "Blockchain Developer at Web3Nova",
+    image: null
+  },
+  {
+    text: "The curriculum is world-class. I learned Solidity, React, and smart contract security in just 12 weeks. Best investment I ever made.",
+    highlight: "Web3nova transformed from an aspiring blockchain developer to an experienced blockchain developer, which lead me to build and co-founded a startup called paycrypt (paycrypt.org)",
+    author: "Adebanjo Abraham",
+    role: "Blockchain Developer at Web3Nova",
     image: null
   }
 ];
