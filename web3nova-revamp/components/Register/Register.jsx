@@ -17,7 +17,7 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL; //
 function BackgroundEffects() {
   return (
     <>
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+      <div className="fixed inset-0 overflow-hidden pointer-events-none bg-black">
         <div className="absolute inset-0 opacity-20">
           <div
             className="absolute inset-0 animate-grid-flow"
