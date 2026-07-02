@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import http from 'http';
 import { Bot, InlineKeyboard } from 'grammy';
 import { createOpportunity, listOpportunities, archiveOpportunity } from './notion.js';
 import { getSession, setSession, clearSession } from './session.js';
@@ -265,5 +266,17 @@ bot.callbackQuery(/^delete_(.+)$/, async (ctx) => {
 // ---------------------------------------------------------------
 // Start
 // ---------------------------------------------------------------
+
+// Render requires a bound HTTP port — spin up a minimal health-check server.
+const PORT = process.env.PORT || 5000;
+http
+  .createServer((_req, res) => {
+    res.writeHead(200, { 'Content-Type': 'text/plain' });
+    res.end('OK');
+  })
+  .listen(PORT, '0.0.0.0', () => {
+    console.log(`Health-check server listening on port ${PORT}`);
+  });
+
 bot.start();
 console.log('Web3Nova bot is running...');
